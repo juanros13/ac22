@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}
+Inventario
+{% endblock%}
+{% block style %}
+<link href="{{ STATIC_PREFIX }}assets/pages/css/search.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_PREFIX }}assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+<link href="{{ STATIC_PREFIX }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+{% endblock%}
+{% block body %}
+<div class="page-content">
+  <!-- BEGIN PAGE HEADER-->
+  <div class="page-bar">
+    <ul class="page-breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+        <i class="fa fa-circle"></i>
+      </li>
+      <li>
+         <span>Comunicación</span>
+      </li>
+    </ul>
+  </div>
+  <h3 class="page-title">
+  INVENTARIO
+  </h3>
+  <div class="portlet light bordered">
+    <div class="portlet-title tabbable-line">
+      <div class="caption">
+          <i class="icon-pin font-yellow-lemon"></i>
+          <span class="caption-subject bold font-yellow-lemon uppercase"> MOVIMIENTOS </span>
+      </div>
+      <div class="actions">
+        <div class="clearfix">
+          <a class="btn  green" data-toggle="modal" href="{% url 'vista_movimiento_crear' %}">
+            Añadir movimiento
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="portlet-body">
+      <div class="tab-content search-page search-content-2">
+        <div class="row">
+          <div class="col-md-12">
+          <br>
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                  <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase">PROVEEDOR</span>
+                  </div>
+                  <div class="tools"> </div>
+                </div>
+                <div class="portlet-body">
+                  <table class="table table-striped table-bordered table-hover" id="tabla_catalogo">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Almacen</th>
+                        <th>Proveedor</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for movimiento in movimientos %}
+                      <tr>
+                        <td>{{ movimiento.catalogo }}</td>
+                        <td>{{ movimiento.tipo }}</td>
+                        <td>{{ movimiento.almacen }}</td>
+                        <td>{{ movimiento.proveedor }}</td>
+                        <td>{{ movimiento.marca }}</td>
+                        <td>{{ movimiento.modelo }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <!-- END EXAMPLE TABLE PORTLET-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block javascript %}
+ <!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="{{ STATIC_PREFIX }}assets/global/scripts/datatable.js" type="text/javascript"></script>
+<script src="{{ STATIC_PREFIX }}assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_PREFIX }}assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="{{ STATIC_PREFIX }}js/apps/inventario/inventario.js" type="text/javascript"></script>
+<!-- END PAGE LEVEL SCRIPTS -->
+<script>
+jQuery(document).ready(function() {    
+  {% if message  %}
+    toastr["success"]("{{ message|safe }}", "Mensaje");
+  {% endif %}
+});
+</script>
+{% endblock %}

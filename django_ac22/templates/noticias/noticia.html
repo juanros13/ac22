@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
+{% block body %}
+<div class="page-content">
+  <div class="page-header">
+    <h1>
+      Noticias
+    </h1>
+  </div><!-- /.page-header -->
+  <div class="row">
+  {% if noticias.object_list %}
+    <div class="col-md-3">
+      {% include "include/noticias_meses.html" %}
+    </div>      
+    <div class="col-md-9">
+      {% for noticia in noticias.object_list %}
+      <div class="row publicacion">
+        <div class="col-md-3">
+          <a href="{{ noticia.get_absolute_url }}">
+            {% if noticia.imagen %}
+            <img src="{% thumbnail noticia.imagen 250x100 crop %}" title="{{ noticia.titulo }}" class="thumbnail">
+            {% else %}
+            <img src="{% get_static_prefix %}img/noticias/sin_thumb.png" title="{{ noticia.titulo }}" class="thumbnail">
+            {% endif %}
+          </a>
+        </div>
+        <div class="col-md-9">
+          <h4>
+            <div class="row">
+              <div class="col-md-9">
+                <a href="{{ noticia.get_absolute_url }}">
+                  {{ noticia.edificio }} - {{ noticia.titulo }}
+                </a>
+              </div>
+              <div class="col-md-3">
+                <small>{{ noticia.fecha_creacion|date:"D d M Y" }}</small>
+              </div>
+            </div>
+          </h4>
+          {% autoescape off %}
+          {{ noticia.contenido|truncatewords:40 }}
+          {% endautoescape %}
+        </div>
+      </div>
+        {% endfor %}
+        <hr/>
+        <div class="text-center">
+          <ul class="pagination">
+          {% load i18n %}
+          {% if noticias.has_previous %}
+            <li><a href="?{{ noticias.previous_page_number.querystring }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><a href="#">&laquo;</a></li>
+          {% endif %}
+          {% for page in noticias.pages %}
+            {% if page %}
+              {% ifequal page noticias.number %}
+                <li class="disabled"><a href="#">{{ page }}</a></li>
+              {% else %}
+                <li><a href="?{{ page.querystring }}">{{ page }}</a></li>
+              {% endifequal %}
+            {% else %}
+              <li class="disabled"><a href="#">...</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if noticias.has_next %}
+            <li><a href="?{{ noticias.next_page_number.querystring }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled"><a href="#">&raquo;</a></li>
+          {% endif %}
+          </ul>
+        </div>
+    {% else %}
+      <h2>No existen noticias</h2>
+    {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

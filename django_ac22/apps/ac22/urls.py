@@ -28,4 +28,4 @@ urlpatterns = [
     url(r'^avisos/', include('apps.avisos.urls')),
     url(r'^inventario/', include('apps.inventario.urls')),
     url(r'^obra/', include('apps.obras.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

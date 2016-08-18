@@ -50,7 +50,7 @@ def cambiar_obra_view(request, id_obra):
 
 def login_view(request):
   if request.user.is_authenticated():
-    return HttpResponseRedirect(reverse('apps.usuarios.views.dashboard_view'))
+    return HttpResponseRedirect(reverse('dashboard'))
   message = ''
   user_login_form = UserLoginForm()
   if request.method == "POST":
@@ -71,7 +71,7 @@ def login_view(request):
             sessionlist.append(obra)
             request.session['obras_disponibles'] = sessionlist
           # Redirect to a success page.
-          return HttpResponseRedirect(reverse('apps.usuarios.views.dashboard_view'))
+          return HttpResponseRedirect(reverse('dashboard'))
         message = 'El usuario se encuentra desactivado'
       message = 'El nombre de usuario o la contraseña no son correctos.'
     else:

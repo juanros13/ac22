@@ -23,6 +23,8 @@ class Obra(models.Model):
     blank=True,
     related_name='administradores'
   )
+  fecha_inicio =  models.DateTimeField()
+  fecha_termino =  models.DateTimeField()
   fecha_creacion =  models.DateTimeField(editable=False)
   fecha_modificacion =  models.DateTimeField(editable=False)
   def __str__(self):

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import authenticate
-from django.forms.widgets import Select, Textarea, SelectMultiple
+from django.forms.widgets import Select, Textarea, SelectMultiple, CheckboxSelectMultiple
 from apps.obras.models import Obra
 
 class ObraAddForm(forms.ModelForm):
@@ -23,5 +23,5 @@ class ObraAddForm(forms.ModelForm):
     fields = ('nombre','direccion', 'imagen', 'administrador')
     widgets = {
       'direccion': Textarea(attrs={'class': 'form-control',}),
-      'administrador': SelectMultiple(attrs={'class': 'form-control',}),
+      'administrador': CheckboxSelectMultiple(attrs={'class': 'form-control radio-list',}),
     }

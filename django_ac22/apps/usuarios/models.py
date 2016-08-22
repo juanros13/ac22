@@ -6,13 +6,6 @@ class UserProfile(models.Model):
   # This field is required.
   user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-
-  curp = models.CharField(
-    max_length=21, 
-    null=True, 
-    blank=True, 
-    default=None
-  )
   telefono = models.CharField(
     max_length=21, 
     null=True, 
@@ -25,60 +18,10 @@ class UserProfile(models.Model):
     blank=True, 
     default=None
   )
-  rfc = models.CharField(
-    max_length=18,
-    null=True, 
-    blank=True, 
-    default=None 
-  )
-  # Este seria el nombre en caso de que estuviera lleno
-  razon_social = models.CharField(
-    max_length=400,
-    null=True, 
-    blank=True, 
-    default=None 
-  )
-  direccion_fisica = models.CharField(
-    max_length=450,
-    null=True, 
-    blank=True, 
-    default=None  
-  )
-  
-  colonia_fisica = models.CharField(
-    max_length=450,
-    null=True, 
-    blank=True, 
-    default=None  
-  )
-  cp_fisico = models.CharField(
-    max_length=450,
-    null=True, 
-    blank=True, 
-    default=None  
-  )
-  delegacion_fisica = models.CharField(
-    max_length=450,
-    null=True, 
-    blank=True, 
-    default=None  
-  )
-  poblacion_fisica = models.CharField(
-    max_length=450,
-    null=True, 
-    blank=True, 
-    default=None  
-  )
-  pass_user = models.CharField(
-    max_length=10,
-    null=True, 
-    blank=True, 
-    default=None  
-  )
+ 
   avatar = models.FileField(
     upload_to='avatars/%Y/%m/%d'
   )
-  id_inquilino = models.IntegerField()
   def get_absolute_url_mensajes(self):
     return "/usuario/mensajes/%s/" % (self.user.username)
 

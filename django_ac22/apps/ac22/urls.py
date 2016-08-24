@@ -28,4 +28,7 @@ urlpatterns = [
     url(r'^avisos/', include('apps.avisos.urls')),
     url(r'^inventario/', include('apps.inventario.urls')),
     url(r'^obra/', include('apps.obras.urls')),
+    url(r'^especificaciones/', include('apps.especificaciones.urls')),
+    url(r'^propuesta_economica/', include('apps.propuesta_economica.urls')),
+    url(r'^propuesta_tecnica/', include('apps.propuesta_tecnica.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -45,7 +45,7 @@
                 <span class="title">Dashboard</span>
               </a>
             </li>
-            <li class="nav-item {% if 'obra' in request.path %}active open{% elif 'especificaciones' in request.path %}active open{% elif 'propuesta_economica' in request.path %}active open{% elif 'propuesta_tecnica' in request.path %}active open{% endif %}">
+            <li class="nav-item {% if 'obra/' in request.path %}active open{% endif %}">
               <a href="" class="nav-link nav-toggle">
                 <i class="fa fa-building-o"></i>
                 <span class="title">Obras</span>
@@ -70,32 +70,35 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item {% if 'obra' in request.path %}active open{% endif %}">
+            <li class="nav-item {% if 'memorias' in request.path %}active open{% elif 'proyecto_ejecutivo' in request.path %}active open{% elif 'calculos' in request.path %}active open{% endif %}">
               <a href="" class="nav-link nav-toggle">
-                <i class="fa fa-building-o"></i>
+                <i class="fa fa-cubes"></i>
                 <span class="title">Ingenieria</span>
                 <span class="arrow"></span>
               </a>
-              {% url 'vista_obra' as vista_obra %}
+              {% url 'vista_memorias' as vista_memorias %}
+              {% url 'vista_proyecto_ejecutivo' as vista_proyecto_ejecutivo %}
+              {% url 'vista_calculos' as vista_calculos %}
               <ul class="sub-menu">
-                <li class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_obra' %}" class="nav-link active"> Memorias </a>
+                <li class="nav-item {% if vista_memorias == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_memorias' %}" class="nav-link active"> Memorias </a>
                 </li>
-                <li class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_obra' %}" class="nav-link active"> Proyecto Ejecutivo </a>
+                <li class="nav-item {% if vista_proyecto_ejecutivo == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_proyecto_ejecutivo' %}" class="nav-link active"> Proyecto Ejecutivo </a>
                 </li>
-                <li class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_obra' %}" class="nav-link active"> Calculos </a>
+                <li class="nav-item {% if vista_calculos == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_calculos' %}" class="nav-link active"> Calculos </a>
                 </li>
 
               </ul>
             </li>
             <li class="nav-item">
               <a href="#" class="nav-link nav-toggle">
-                <i class="icon-briefcase"></i>
+                <i class="fa fa-bar-chart-o"></i>
                 <span class="title">Administración</span>
                 <span class="arrow open"></span>
               </a>
+              {% url 'vista_obra' as vista_obra %}
               <ul class="sub-menu">
                 <li class="nav-item">
                   <a href="#" class="nav-link nav-toggle">
@@ -122,6 +125,31 @@
                       </a>
                     </li>
                   </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item {% if 'ejecucion' in request.path %}active open{% endif %}">
+              <a href="" class="nav-link nav-toggle">
+                <i class="fa fa-line-chart"></i>
+                <span class="title">Ejecución</span>
+                <span class="arrow"></span>
+              </a>
+              {% url 'vista_programa_gral' as vista_programa_gral %}
+              {% url 'vista_suministros' as vista_suministros %}
+              {% url 'vista_seguimiento' as vista_seguimiento %}
+              {% url 'vista_estimaciones' as vista_estimaciones %}
+              <ul class="sub-menu">
+                <li class="nav-item {% if vista_programa_gral == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_programa_gral' %}" class="nav-link active"> Programa general de obra </a>
+                </li>
+                <li class="nav-item {% if vista_suministros == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_suministros' %}" class="nav-link active"> Suministros</a>
+                </li>
+                <li class="nav-item {% if vista_seguimiento == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_seguimiento' %}" class="nav-link active"> Seguimiento </a>
+                </li>
+                <li class="nav-item {% if vista_estimaciones == request.path %}active open{% endif %}">
+                  <a href="{% url 'vista_estimaciones' %}" class="nav-link active"> Estimaciones </a>
                 </li>
               </ul>
             </li>

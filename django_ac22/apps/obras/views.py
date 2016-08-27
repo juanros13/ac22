@@ -7,7 +7,39 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpRespons
 from django.forms import formset_factory
 from django.contrib.auth.models import User
 from apps.obras.forms import ObraAddForm
-from apps.obras.models import Obra
+from apps.obras.models import Obra, Estado
+
+@login_required(login_url='/')
+def estados_view(request):
+  message = ''
+  if request.session.get('_info_message'):
+    message = request.session.get('_info_message')
+  request.session['_info_message'] = ''
+  obras = Obra.objects.all()
+  estados = Estado.objects.all()
+  context = {
+    'message': message,
+    'obras' : obras,
+    'estados':estados
+  }
+  return render(request, 'obras/estados.html',context)
+
+
+@login_required(login_url='/')
+def estado_obras_view(request, abreviatura_estado):
+  message = ''
+  if request.session.get('_info_message'):
+    message = request.session.get('_info_message')
+  request.session['_info_message'] = ''
+  estado = Estado.objects.filter(abreviatura=abreviatura_estado)
+  obras = Obra.objects.filter(estado=estado)
+  context = {
+    'message': message,
+    'obras':obras
+  }
+  return render(request, 'obras/obras_x_estado.html',context)
+
+
 
 @login_required(login_url='/')
 def edificio_view(request):
@@ -46,7 +78,7 @@ def edificio_editar_view(request, id_edificio):
     obra_form = ObraAddForm(request.POST, request.FILES, instance=obra)
     if obra_form.is_valid():
       obra_form.save()
-      request.session['_info_message']  = 'Edificio actualizado correctamente'  
+      request.session['_info_message']  = 'Obra actualizada correctamente'  
       return HttpResponseRedirect(url)
   context = {
     'obra_form': obra_form,

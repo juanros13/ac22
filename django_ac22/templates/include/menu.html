@@ -55,9 +55,10 @@
               {% url 'vista_especificaciones' as vista_especificaciones %}
               {% url 'vista_propuesta_economica' as vista_propuesta_economica %}
               {% url 'vista_propuesta_tecnica' as vista_propuesta_tecnica %}
+              {% url 'vista_estados' as vista_estados %}
               <ul class="sub-menu">
                 <li class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_obra' %}" class="nav-link active"> Obras </a>
+                  <a href="{% url 'vista_estados' %}" class="nav-link active"> Obras </a>
                 </li>
                 <li class="nav-item {% if vista_especificaciones == request.path %}active open{% endif %}">
                   <a href="{% url 'vista_especificaciones' %}" class="nav-link active"> Especificaciones</a>
@@ -109,19 +110,16 @@
                     <li class="nav-item">
                       <a href="#" class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
                         <span class="title">Materiales</span>
-                        <span class="arrow open"></span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a href="#" class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
                         <span class="title">Humanos</span>
-                        <span class="arrow open"></span>
                       </a>
                     </li>
                     <li class="nav-item">
                       <a href="#" class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
                         <span class="title">Financieros</span>
-                        <span class="arrow open"></span>
                       </a>
                     </li>
                   </ul>

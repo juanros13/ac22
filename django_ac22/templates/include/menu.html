@@ -1,207 +1,279 @@
 <!-- BEGIN SIDEBAR -->
-      <div class="page-sidebar-wrapper">
-        <!-- BEGIN SIDEBAR -->
-        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <div class="page-sidebar navbar-collapse collapse">
-          <!-- BEGIN SIDEBAR MENU -->
-          <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
-          <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
-          <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
-          <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-          <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
-          <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-          <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
-            <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
-            <li class="sidebar-toggler-wrapper hide">
-              <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-              <div class="sidebar-toggler"> </div>
-              <!-- END SIDEBAR TOGGLER BUTTON -->
-            </li>
-            <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
-            <li class="sidebar-search-wrapper">
-              <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-              <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
-              <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
-              <form class="sidebar-search  sidebar-search-bordered" action="./" method="POST">
-                <a href="javascript:;" class="remove">
-                  <i class="icon-close"></i>
-                </a>
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Search...">
-                  <span class="input-group-btn">
-                    <a href="javascript:;" class="btn submit">
-                      <i class="icon-magnifier"></i>
-                    </a>
-                  </span>
-                </div>
-              </form>
-              <!-- END RESPONSIVE QUICK SEARCH FORM -->
-            </li>
-           
-            <li class="nav-item ">
-              <a href="{% url 'dashboard' %}" class="nav-link nav-toggle">
-                <i class="icon-home"></i>
-                <span class="title">Dashboard</span>
+<div class="page-sidebar-wrapper">
+  <!-- BEGIN SIDEBAR -->
+  <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+  <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+  <div class="page-sidebar navbar-collapse collapse">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+    <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+      <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+      <li class="sidebar-toggler-wrapper hide">
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <div class="sidebar-toggler"> </div>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+      </li>
+      <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+      <li class="sidebar-search-wrapper">
+        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+        <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+        <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+        <form class="sidebar-search  sidebar-search-bordered" action="./" method="POST">
+          <a href="javascript:;" class="remove">
+            <i class="icon-close"></i>
+          </a>
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <a href="javascript:;" class="btn submit">
+                <i class="icon-magnifier"></i>
               </a>
-            </li>
-            <li class="nav-item {% if 'obra/' in request.path %}active open{% endif %}">
-              <a href="" class="nav-link nav-toggle">
-                <i class="fa fa-building-o"></i>
-                <span class="title">Obras</span>
-                <span class="arrow"></span>
-              </a>
-              {% url 'vista_obra' as vista_obra %}
-              {% url 'vista_especificaciones' as vista_especificaciones %}
-              {% url 'vista_propuesta_economica' as vista_propuesta_economica %}
-              {% url 'vista_propuesta_tecnica' as vista_propuesta_tecnica %}
-              {% url 'vista_estados' as vista_estados %}
-              <ul class="sub-menu">
-                <li class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_estados' %}" class="nav-link active"> Obras </a>
-                </li>
-                <li class="nav-item {% if vista_especificaciones == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_especificaciones' %}" class="nav-link active"> Especificaciones</a>
-                </li>
-                <li class="nav-item {% if vista_propuesta_tecnica == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_propuesta_tecnica' %}" class="nav-link active"> Propuesta Tecnica</a>
-                </li>
-                <li class="nav-item {% if vista_propuesta_economica == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_propuesta_economica' %}" class="nav-link active"> Propuesta Economica</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {% if 'memorias' in request.path %}active open{% elif 'proyecto_ejecutivo' in request.path %}active open{% elif 'calculos' in request.path %}active open{% endif %}">
-              <a href="" class="nav-link nav-toggle">
-                <i class="fa fa-cubes"></i>
-                <span class="title">Ingenieria</span>
-                <span class="arrow"></span>
-              </a>
-              {% url 'vista_memorias' as vista_memorias %}
-              {% url 'vista_proyecto_ejecutivo' as vista_proyecto_ejecutivo %}
-              {% url 'vista_calculos' as vista_calculos %}
-              <ul class="sub-menu">
-                <li class="nav-item {% if vista_memorias == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_memorias' %}" class="nav-link active"> Memorias </a>
-                </li>
-                <li class="nav-item {% if vista_proyecto_ejecutivo == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_proyecto_ejecutivo' %}" class="nav-link active"> Proyecto Ejecutivo </a>
-                </li>
-                <li class="nav-item {% if vista_calculos == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_calculos' %}" class="nav-link active"> Calculos </a>
-                </li>
+            </span>
+          </div>
+        </form>
+        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+      </li>
+     
+      <li class="nav-item ">
+        <a href="{% url 'dashboard' %}" class="nav-link nav-toggle">
+          <i class="icon-home"></i>
+          <span class="title">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item {% if 'obra/' in request.path %}active open{% endif %}">
+        <a href="" class="nav-link nav-toggle">
+          <i class="fa fa-building-o"></i>
+          <span class="title">Obras</span>
+          <span class="arrow"></span>
+        </a>
+        {% url 'vista_obra' as vista_obra %}
+        {% url 'vista_especificaciones' as vista_especificaciones %}
+        {% url 'vista_propuesta_economica' as vista_propuesta_economica %}
+        {% url 'vista_propuesta_tecnica' as vista_propuesta_tecnica %}
+        {% url 'vista_estados' as vista_estados %}
+        <ul class="sub-menu">
+          <li class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_estados' %}" class="nav-link active"> Obras </a>
+          </li>
+          <li class="nav-item {% if vista_especificaciones == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_especificaciones' %}" class="nav-link active"> Especificaciones</a>
+          </li>
+          <li class="nav-item {% if vista_propuesta_tecnica == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_propuesta_tecnica' %}" class="nav-link active"> Propuesta Tecnica</a>
+          </li>
+          <li class="nav-item {% if vista_propuesta_economica == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_propuesta_economica' %}" class="nav-link active"> Propuesta Economica</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item {% if 'memorias' in request.path %}active open{% elif 'proyecto_ejecutivo' in request.path %}active open{% elif 'calculos' in request.path %}active open{% endif %}">
+        <a href="" class="nav-link nav-toggle">
+          <i class="fa fa-cubes"></i>
+          <span class="title">Ingenieria</span>
+          <span class="arrow"></span>
+        </a>
+        {% url 'vista_memorias' as vista_memorias %}
+        {% url 'vista_proyecto_ejecutivo' as vista_proyecto_ejecutivo %}
+        {% url 'vista_calculos' as vista_calculos %}
+        <ul class="sub-menu">
+          <li class="nav-item {% if vista_memorias == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_memorias' %}" class="nav-link active"> Memorias </a>
+          </li>
+          <li class="nav-item {% if vista_proyecto_ejecutivo == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_proyecto_ejecutivo' %}" class="nav-link active"> Proyecto Ejecutivo </a>
+          </li>
+          <li class="nav-item {% if vista_calculos == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_calculos' %}" class="nav-link active"> Calculos </a>
+          </li>
 
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link nav-toggle">
-                <i class="fa fa-bar-chart-o"></i>
-                <span class="title">Administración</span>
-                <span class="arrow open"></span>
-              </a>
-              {% url 'vista_obra' as vista_obra %}
-              <ul class="sub-menu">
-                <li class="nav-item">
-                  <a href="#" class="nav-link nav-toggle">
-                    <span class="title">Recursos</span>
-                    <span class="arrow open"></span>
-                  </a>
-                  <ul class="sub-menu">
-                    <li class="nav-item">
-                      <a href="#" class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                        <span class="title">Materiales</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                        <span class="title">Humanos</span>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="#" class="nav-item {% if vista_obra == request.path %}active open{% endif %}">
-                        <span class="title">Financieros</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {% if 'ejecucion' in request.path %}active open{% endif %}">
-              <a href="" class="nav-link nav-toggle">
-                <i class="fa fa-line-chart"></i>
-                <span class="title">Ejecución</span>
-                <span class="arrow"></span>
-              </a>
-              {% url 'vista_programa_gral' as vista_programa_gral %}
-              {% url 'vista_suministros' as vista_suministros %}
-              {% url 'vista_seguimiento' as vista_seguimiento %}
-              {% url 'vista_estimaciones' as vista_estimaciones %}
-              <ul class="sub-menu">
-                <li class="nav-item {% if vista_programa_gral == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_programa_gral' %}" class="nav-link active"> Programa general de obra </a>
-                </li>
-                <li class="nav-item {% if vista_suministros == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_suministros' %}" class="nav-link active"> Suministros</a>
-                </li>
-                <li class="nav-item {% if vista_seguimiento == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_seguimiento' %}" class="nav-link active"> Seguimiento </a>
-                </li>
-                <li class="nav-item {% if vista_estimaciones == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_estimaciones' %}" class="nav-link active"> Estimaciones </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item {% if 'inventario' in request.path %}active open{% endif %}">
-              <a href="" class="nav-link nav-toggle">
-                <i class="icon-drawer"></i>
-                <span class="title">Inventario</span>
-                <span class="arrow"></span>
-              </a>
-              {% url 'vista_inventario_resumen' as vista_inventario_resumen %}
-              {% url 'vista_almacen' as vista_almacen %}
-              {% url 'vista_proveedor' as vista_proveedor %}
-              {% url 'vista_movimiento' as vista_movimiento %}
-              {% url 'vista_inventario' as vista_inventario %}
-              <ul class="sub-menu">
-                <li class="nav-item {% if vista_inventario_resumen == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_inventario_resumen' %}" class="nav-link active"> Resumen </a>
-                </li>
-                <li class="nav-item {% if vista_almacen == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_almacen' %}" class="nav-link "> Almacen </a>
-                </li>
-                <li class="nav-item {% if vista_proveedor == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_proveedor' %}" class="nav-link "> Proveedor </a>
-                </li>
-                <li class="nav-item {% if vista_movimiento == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_movimiento' %}" class="nav-link "> Movimientos </a>
-                </li>
-                <li class="nav-item {% if vista_inventario == request.path %}active open{% endif %}">
-                  <a href="{% url 'vista_inventario' %}" class="nav-link "> Inventario </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item ">
-              <a href="{% url 'vista_avisos' %}" class="nav-link nav-toggle">
-                <i class="icon-drawer"></i>
-                <span class="title">Avisos</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="{% url 'vista_directorio' %}" class="nav-link nav-toggle">
-                <i class="icon-drawer"></i>
-                <span class="title">Directorio</span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a href="{% url 'vista_mensajes' %}" class="nav-link nav-toggle">
-                <i class="icon-home"></i>
-                <span class="title">Mensajes</span>
-              </a>
-            </li>
-          </ul>
-          <!-- END SIDEBAR MENU -->
-          <!-- END SIDEBAR MENU -->
-        </div>
-        <!-- END SIDEBAR -->
-      </div>
-      <!-- END SIDEBAR -->
+        </ul>
+      </li>
+      <li class="nav-item ">
+        <a href="{% url 'vista_catalogo_de_conceptos' %}" class="nav-link nav-toggle">
+          <i class="fa fa-list-ul"></i>
+          <span class="title">Catalogo de conceptos</span>
+        </a>
+      </li>
+      <li class="nav-item {% if 'recursos/' in request.path %}active open{% endif %}">
+        <a href="#" class="nav-link nav-toggle">
+          <i class="fa fa-bar-chart-o"></i>
+          <span class="title">Administración</span>
+          <span class="arrow"></span>
+        </a>
+        {% url 'vista_recursos_todos' as vista_recursos_todos %}
+        {% url 'vista_recursos_materiales' as vista_recursos_materiales %}
+        {% url 'vista_recursos_eq_seguridad' as vista_recursos_eq_seguridad %}
+        {% url 'vista_recursos_herramienta_menor' as vista_recursos_herramienta_menor %}
+        {% url 'vista_equipo_y_maquinaria' as vista_equipo_y_maquinaria %}
+        <ul class="sub-menu">
+          
+          <li class="nav-item {% if 'recursos/' in request.path %}active open{% endif %}">
+            <a href="#" class="nav-link nav-toggle">
+              <span class="title">Recursos</span>
+              <span class="arrow open"></span>
+            </a>
+            <ul class="sub-menu">
+              <li class="nav-item {% if vista_recursos_todos == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_recursos_todos' %}" class="nav-item {% if vista_recursos_todos == request.path %}active open{% endif %}">
+                  <span class="title">Todos</span>
+                </a>
+              </li>
+              <li class="nav-item {% if vista_recursos_materiales == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_recursos_materiales' %}" class="nav-item {% if vista_recursos_materiales == request.path %}active open{% endif %}">
+                  <span class="title">Materiales</span>
+                </a>
+              </li>
+              <li class="nav-item {% if vista_recursos_eq_seguridad == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_recursos_eq_seguridad' %}" class="nav-item {% if vista_recursos_eq_seguridad == request.path %}active open{% endif %}">
+                  <span class="title">Equipo de seguridad</span>
+                </a>
+              </li>
+              <li class="nav-item {% if vista_recursos_herramienta_menor == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_recursos_herramienta_menor' %}" class="nav-item {% if vista_recursos_herramienta_menor == request.path %}active open{% endif %}">
+                  <span class="title">Herramienta menor</span>
+                </a>
+              </li>
+              <li class="nav-item {% if vista_equipo_y_maquinaria == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_equipo_y_maquinaria' %}" class="nav-item {% if vista_equipo_y_maquinaria == request.path %}active open{% endif %}">
+                  <span class="title">Equipo y maquinaria</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item {% if 'financiera/' in request.path %}active openactive open{% endif %}">
+        <a href="#" class="nav-link nav-toggle">
+          <i class="glyphicon glyphicon-usd"></i>
+          <span class="title">Gestión financiera</span>
+          <span class="arrow {% if 'financiera/' in request.path %}open{% endif %}"></span>
+        </a>
+        {% url 'vista_ingreso_crear' as vista_ingreso_crear %}
+        {% url 'vista_ingreso' as vista_ingreso %}
+        {% url 'vista_gasto_crear' as vista_gasto_crear %}
+        {% url 'vista_gasto' as vista_gasto %}
+        <ul class="sub-menu">
+          <li class="nav-item {% if 'financiera/ingreso' in request.path %}active openactive open{% endif %}">
+            <a href="#" class="nav-link nav-toggle">
+              <i class="fa fa-download"></i>
+              <span class="title">Ingreso</span>
+              <span class="arrow {% if 'financiera/ingreso' in request.path %}open{% endif %}"></span>
+            </a>
+            <ul class="sub-menu">
+              <li class="nav-item {% if vista_ingreso_crear == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_ingreso_crear' %}" class="nav-link nav-toggle">
+                  Registrar
+                </a>
+              </li>
+              <li class="nav-item {% if vista_ingreso == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_ingreso' %}" class="nav-link nav-toggle">
+                  Consultar
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item {% if 'financiera/egresos' in request.path %}active openactive open{% endif %}">
+            <a href="#" class="nav-link nav-toggle">
+              <i class="fa fa-upload"></i>
+              <span class="title">Egresos</span>
+              <span class="arrow {% if 'financiera/egresos' in request.path %}open{% endif %}"></span>
+            </a>
+            <ul class="sub-menu">
+              <li class="nav-item {% if vista_gasto_crear == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_gasto_crear' %}" class="nav-link nav-toggle">
+                  Registrar
+                </a>
+              </li>
+              <li class="nav-item {% if vista_gasto == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_gasto' %}" class="nav-link nav-toggle">
+                  Consultar
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item {% if 'ejecucion' in request.path %}active open{% endif %}">
+        <a href="" class="nav-link nav-toggle">
+          <i class="fa fa-line-chart"></i>
+          <span class="title">Ejecución</span>
+          <span class="arrow"></span>
+        </a>
+        {% url 'vista_programa_gral' as vista_programa_gral %}
+        {% url 'vista_suministros' as vista_suministros %}
+        {% url 'vista_seguimiento' as vista_seguimiento %}
+        {% url 'vista_estimaciones' as vista_estimaciones %}
+        <ul class="sub-menu">
+          <li class="nav-item {% if vista_programa_gral == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_programa_gral' %}" class="nav-link active"> Programa general de obra </a>
+          </li>
+          <li class="nav-item {% if vista_suministros == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_suministros' %}" class="nav-link active"> Suministros</a>
+          </li>
+          <li class="nav-item {% if vista_seguimiento == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_seguimiento' %}" class="nav-link active"> Seguimiento </a>
+          </li>
+          <li class="nav-item {% if vista_estimaciones == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_estimaciones' %}" class="nav-link active"> Estimaciones </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item {% if 'inventario' in request.path %}active open{% endif %}">
+        <a href="" class="nav-link nav-toggle">
+          <i class="icon-drawer"></i>
+          <span class="title">Inventario</span>
+          <span class="arrow"></span>
+        </a>
+        {% url 'vista_inventario_resumen' as vista_inventario_resumen %}
+        {% url 'vista_almacen' as vista_almacen %}
+        {% url 'vista_proveedor' as vista_proveedor %}
+        {% url 'vista_movimiento' as vista_movimiento %}
+        {% url 'vista_inventario' as vista_inventario %}
+        <ul class="sub-menu">
+          <li class="nav-item {% if vista_inventario_resumen == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_inventario_resumen' %}" class="nav-link active"> Resumen </a>
+          </li>
+          <li class="nav-item {% if vista_almacen == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_almacen' %}" class="nav-link "> Almacen </a>
+          </li>
+          <li class="nav-item {% if vista_proveedor == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_proveedor' %}" class="nav-link "> Proveedor </a>
+          </li>
+          <li class="nav-item {% if vista_movimiento == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_movimiento' %}" class="nav-link "> Movimientos </a>
+          </li>
+          <li class="nav-item {% if vista_inventario == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_inventario' %}" class="nav-link "> Inventario </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item ">
+        <a href="{% url 'vista_avisos' %}" class="nav-link nav-toggle">
+          <i class="icon-drawer"></i>
+          <span class="title">Avisos</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a href="{% url 'vista_directorio' %}" class="nav-link nav-toggle">
+          <i class="icon-drawer"></i>
+          <span class="title">Directorio</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a href="{% url 'vista_mensajes' %}" class="nav-link nav-toggle">
+          <i class="icon-home"></i>
+          <span class="title">Mensajes</span>
+        </a>
+      </li>
+    </ul>
+    <!-- END SIDEBAR MENU -->
+    <!-- END SIDEBAR MENU -->
+  </div>
+  <!-- END SIDEBAR -->
+</div>
+<!-- END SIDEBAR -->

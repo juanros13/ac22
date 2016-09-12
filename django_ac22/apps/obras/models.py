@@ -3,6 +3,7 @@ import os
 from uuid import uuid4
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.deconstruct import deconstructible
 from sorl.thumbnail import ImageField
 
 
@@ -13,6 +14,22 @@ def path_and_rename(path):
     filename = '{}.{}'.format(uuid4().hex, ext)
     # return the whole path to the file
     return os.path.join(path, filename)
+  return wrapper
+
+@deconstructible
+class PathAndRename(object):
+  def __init__(self, sub_path):
+    self.path = sub_path
+  def __call__(self, instance, filename):
+    ext = filename.split('.')[-1]
+    # set filename as random string
+    filename = '{}.{}'.format(uuid4().hex, ext)
+    # return the whole path to the file
+    return os.path.join(self.path, filename)
+
+
+path_and_rename_estados = PathAndRename("estados")
+path_and_rename_obras = PathAndRename("obras")
 
 class Estado(models.Model):
   nombre = models.CharField(
@@ -24,7 +41,7 @@ class Estado(models.Model):
   clave = models.CharField(
     max_length=5,
   )
-  imagen = ImageField(upload_to=path_and_rename('estados/'), blank=True)
+  imagen = ImageField(upload_to=path_and_rename_estados, blank=True)
   fecha_creacion =  models.DateTimeField(editable=False)
   fecha_modificacion =  models.DateTimeField(editable=False)
   def __unicode__(self):
@@ -41,7 +58,7 @@ class Obra(models.Model):
     max_length=450,
   )
   direccion = models.TextField()
-  imagen = ImageField(upload_to=path_and_rename('edificios/'), blank=True)
+  imagen = ImageField(upload_to=path_and_rename_obras, blank=True)
   administrador = models.ManyToManyField(
     User,
     blank=True,

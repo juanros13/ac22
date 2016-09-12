@@ -38,4 +38,7 @@ urlpatterns = [
     url(r'^ejecucion/suministros/', include('apps.suministros.urls')),
     url(r'^ejecucion/seguimiento/', include('apps.seguimiento.urls')),
     url(r'^ejecucion/estimaciones/', include('apps.estimaciones.urls')),
+    url(r'^recursos/', include('apps.recursos.urls')),
+    url(r'^catalogo_de_conceptos/', include('apps.catalogo_de_conceptos.urls')),
+    url(r'^gestion_financiera/', include('apps.gestion_financiera.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

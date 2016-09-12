@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load mptt_tags %}
 {% block title %}
 Especificaciones
 {% endblock%}
@@ -32,7 +33,7 @@ Especificaciones
       </div>
       <div class="actions">
         <div class="clearfix">
-          <a class="btn  green" data-toggle="modal" href="{% url 'vista_obra_crear' %}">
+          <a class="btn  green" data-toggle="modal" href="{% url 'vista_especificaciones_crear' %}">
             Añadir nueva especificación
             <i class="fa fa-plus"></i>
           </a>
@@ -44,30 +45,40 @@ Especificaciones
         <div class="row">
           <div class="col-md-12">
             <table class="table tree">
-              <tr class="treegrid-1">
-                <td>Root node</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
+              <tr>
+                <th>DOCUMENTO</th>
+                <th>CONTENIDO DEL ANEXO</th>
+                <th>NOMBRE ANEXO</th>
+                <th>ACCIONES</th>
               </tr>
-              <tr class="treegrid-2 treegrid-parent-1">
-                <td>Node 1-1</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
+              {% for node in especificaciones %}
+              <tr class="treegrid-{{ node.id }} {% if node.parent_id %}treegrid-parent-{{ node.parent_id }}{% endif %}">
+                <td>{%if node.nombre_documento %}DOCUMENTO {{ node.nombre_documento }}{% endif %}</td>
+                <td>{{ node.contenido|truncatewords:9 }}</td>
+                <td>{%if node.nombre_anexo %}ANEXO {{ node.nombre_anexo }}{% endif %}</td>
+                <td>
+                  <div class="actions">
+                    {% if node.anexo %}
+                    <a target="_blank" class="btn btn-circle btn-icon-only btn-default green" href="{% if node.anexo %}{{ node.anexo.url }}{% endif %}" title="DESCARGAR">
+                      <i class="fa fa-download"></i>
+                    </a>
+                    {% endif %}
+                    <a class="btn btn-circle btn-icon-only btn-default" href="#" title="COMPARTIR">
+                      <i class="glyphicon glyphicon-share"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" href="#" title="IMPRIMIR">
+                      <i class="glyphicon glyphicon-print"></i>
+                    </a>
+                    <a href="{% url 'vista_especificaciones_editar' node.id %}" class="btn btn-circle btn-icon-only btn-default" title="MODIFICAR">
+                      <i class="icon-wrench"></i>
+                    </a>
+                    <a href="{% url 'vista_especificaciones_eliminar' node.id %}" class="btn btn-circle btn-icon-only btn-default red"  title="ELIMINAR">
+                      <i class="icon-trash"></i>
+                    </a>
+                  </div>
+                </td>
               </tr>
-              <tr class="treegrid-3 treegrid-parent-1">
-                <td>Node 1-2</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
-              </tr>
-              <tr class="treegrid-4 treegrid-parent-3">
-                <td>Node 1-2-1</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
-                <td>Additional info</td>
-              </tr>
+              {% endfor %}
             </table>
           </div>
         </div>
@@ -88,6 +99,7 @@ jQuery(document).ready(function() {
   toastr["success"]("{{ message|safe }}", "Mensaje");
   {% endif %}
   $('.tree').treegrid();
+  $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 {% endblock %}

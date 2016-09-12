@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
@@ -19,6 +20,7 @@ from django.views.decorators.http import require_POST
 from apps.usuarios.models import UserMensaje
 from apps.usuarios.forms import  UserLoginForm, UserUpdatePassword, UserUpdateProfile, UserUpdateAvatar, UserMensajeForm
 from apps.obras.models import Obra
+
 
 def get_mensajes_no_leidos(request):
   try:
@@ -43,9 +45,9 @@ def cambiar_obra_view(request, id_obra):
   obra = get_object_or_404(Obra, pk=id_obra)
   if Obra.objects.filter(administrador=request.user, pk=id_obra).exists():
     request.session['obra_actual'] = [obra.nombre,obra.id]
-    request.session['_info_message'] = 'Edificio cambiado correctamente' 
+    messages.success(request, 'Edificio cambiado correctamente')
   else:
-    request.session['_info_message'] = 'No eres administrador de este edificio' 
+    messages.error(request, 'No eres administrador de este obra.')
   return HttpResponseRedirect(url)
 
 def login_view(request):

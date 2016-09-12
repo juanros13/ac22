@@ -97,9 +97,6 @@ Almacen
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
-  {% if message  %}
-    toastr["success"]("{{ message|safe }}", "Mensaje");
-  {% endif %}
 });
 </script>
 {% endblock %}

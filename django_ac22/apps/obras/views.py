@@ -3,6 +3,7 @@ from datetime import datetime, date, time
 from django.shortcuts import render, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib import messages
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseServerError
 from django.forms import formset_factory
 from django.contrib.auth.models import User
@@ -11,14 +12,9 @@ from apps.obras.models import Obra, Estado
 
 @login_required(login_url='/')
 def estados_view(request):
-  message = ''
-  if request.session.get('_info_message'):
-    message = request.session.get('_info_message')
-  request.session['_info_message'] = ''
   obras = Obra.objects.all()
   estados = Estado.objects.all()
   context = {
-    'message': message,
     'obras' : obras,
     'estados':estados
   }
@@ -34,7 +30,6 @@ def estado_obras_view(request, abreviatura_estado):
   estado = Estado.objects.filter(abreviatura=abreviatura_estado)
   obras = Obra.objects.filter(estado=estado)
   context = {
-    'message': message,
     'obras':obras
   }
   return render(request, 'obras/obras_x_estado.html',context)
@@ -49,7 +44,6 @@ def edificio_view(request):
   request.session['_info_message'] = ''
   obras = Obra.objects.all()
   context = {
-    'message': message,
     'obras' : obras,
   }
   return render(request, 'obras/obra.html',context)
@@ -62,8 +56,10 @@ def edificio_crear_view(request):
     obra_form = ObraAddForm(request.POST, request.FILES)
     if obra_form.is_valid():
       obra_form.save()
-      request.session['_info_message']  = 'Obra agregada correctamente'  
+      messages.success(request, 'Obra agregada correctamente')
       return HttpResponseRedirect(url)
+    else:
+      messages.error(request, 'Errores en la forma')
   context = {
     'obra_form': obra_form,
   }
@@ -78,8 +74,10 @@ def edificio_editar_view(request, id_edificio):
     obra_form = ObraAddForm(request.POST, request.FILES, instance=obra)
     if obra_form.is_valid():
       obra_form.save()
-      request.session['_info_message']  = 'Obra actualizada correctamente'  
+      messages.success(request, 'Obra actualizada correctamente')
       return HttpResponseRedirect(url)
+    else:
+      messages.error(request, 'Errores en la forma')
   context = {
     'obra_form': obra_form,
     'obra':obra,

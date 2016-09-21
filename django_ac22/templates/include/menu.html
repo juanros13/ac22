@@ -102,7 +102,7 @@
       <li class="nav-item {% if 'recursos/' in request.path %}active open{% endif %}">
         <a href="#" class="nav-link nav-toggle">
           <i class="fa fa-bar-chart-o"></i>
-          <span class="title">Administración</span>
+          <span class="title">Gestion Administrativa</span>
           <span class="arrow"></span>
         </a>
         {% url 'vista_recursos_todos' as vista_recursos_todos %}
@@ -157,11 +157,16 @@
         {% url 'vista_ingreso' as vista_ingreso %}
         {% url 'vista_gasto_crear' as vista_gasto_crear %}
         {% url 'vista_gasto' as vista_gasto %}
+        {% url 'vista_transferencia' as vista_transferencia %}
+        {% url 'vista_transferencia_crear' as vista_transferencia_crear %}
+        {% url 'vista_cuentas_contables' as vista_cuentas_contables %}
+        {% url 'vista_cuentas_contables_crear' as vista_cuentas_contables_crear %}
+        
         <ul class="sub-menu">
           <li class="nav-item {% if 'financiera/ingreso' in request.path %}active openactive open{% endif %}">
             <a href="#" class="nav-link nav-toggle">
               <i class="fa fa-download"></i>
-              <span class="title">Ingreso</span>
+              <span class="title">Ingresos</span>
               <span class="arrow {% if 'financiera/ingreso' in request.path %}open{% endif %}"></span>
             </a>
             <ul class="sub-menu">
@@ -186,15 +191,50 @@
             <ul class="sub-menu">
               <li class="nav-item {% if vista_gasto_crear == request.path %}active open{% endif %}">
                 <a href="{% url 'vista_gasto_crear' %}" class="nav-link nav-toggle">
+                  <i class="fa fa-upload"></i>
+                  Gastos
+                  <span class="arrow {% if 'financiera/egresos' in request.path %}open{% endif %}"></span>  
+                </a>
+                <ul class="sub-menu">
+                  <li class="nav-item {% if vista_gasto_crear == request.path %}active open{% endif %}">
+                    <a href="{% url 'vista_gasto_crear' %}" class="nav-link nav-toggle">
+                      Registrar
+                    </a>
+                  </li>
+                  <li class="nav-item {% if vista_gasto == request.path %}active open{% endif %}">
+                    <a href="{% url 'vista_gasto' %}" class="nav-link nav-toggle">
+                      Consultar
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item {% if 'financiera/transferencia' in request.path %}active openactive open{% endif %}">
+            <a href="#" class="nav-link nav-toggle">
+              <i class="glyphicon glyphicon-transfer"></i>
+              <span class="title">Transferencias</span>
+              <span class="arrow {% if 'financiera/transferencia' in request.path %}open{% endif %}"></span>
+            </a>
+            <ul class="sub-menu">
+              <li class="nav-item {% if vista_transferencia_crear == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_transferencia_crear' %}" class="nav-link nav-toggle">
                   Registrar
                 </a>
               </li>
-              <li class="nav-item {% if vista_gasto == request.path %}active open{% endif %}">
-                <a href="{% url 'vista_gasto' %}" class="nav-link nav-toggle">
+              <li class="nav-item {% if vista_transferencia == request.path %}active open{% endif %}">
+                <a href="{% url 'vista_transferencia' %}" class="nav-link nav-toggle">
                   Consultar
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item {% if vista_cuentas_contables == request.path %}active open
+            {% elif vista_cuentas_contables_crear == request.path %}active open{% endif %}">
+            <a href="{% url 'vista_cuentas_contables' %}" class="nav-link nav-toggle">
+              <i class="glyphicon glyphicon-credit-card"></i>
+              Cuentas contables
+            </a>
           </li>
         </ul>
       </li>

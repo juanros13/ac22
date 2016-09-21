@@ -8,21 +8,27 @@ from apps.inventario.models import Proveedor
 
 
 
-class Cuenta(MPTTModel):
-  nombre = models.CharField(max_length=450)
-  parent = TreeForeignKey(
-    'self', 
-    null=True, 
-    blank=True, 
-    related_name='children', 
-    db_index=True,
-    verbose_name="Padre"
+class Cuenta(models.Model):
+  nombre = models.CharField(
+    max_length=255,
+    unique=True
   )
-
+  numero_cuenta = models.CharField(
+    max_length=255,
+    unique=True
+  )
+  saldo_inicial = models.DecimalField(max_digits=12, decimal_places=2)
+  fecha = models.DateField()
+  activo = models.BooleanField()
+  fecha_creacion =  models.DateTimeField(editable=False)
+  fecha_modificacion =  models.DateTimeField(editable=False)
   def __unicode__(self):
     return self.nombre
-  class MPTTMeta:
-    order_insertion_by = ['nombre']  
+  def save(self, *args, **kwargs):
+    if not self.id:
+      self.fecha_creacion = datetime.datetime.today()
+    self.fecha_modificacion = datetime.datetime.today()
+    super(Cuenta, self).save(*args, **kwargs)
 
 class MetodoPago(models.Model):
   nombre = models.CharField(max_length=450)
@@ -96,11 +102,39 @@ class Gasto(models.Model):
     if not self.id:
       self.fecha_creacion = datetime.datetime.today()
     self.fecha_modificacion = datetime.datetime.today()
-    super(Ingreso, self).save(*args, **kwargs)
+    super(Gasto, self).save(*args, **kwargs)
 
 class GastoDetalle(models.Model):
   gasto = models.ForeignKey(Gasto)
   concepto = models.CharField(max_length=450)
   monto = models.DecimalField(max_digits=12, decimal_places=2)
+  obra = models.ForeignKey(
+    Obra,
+    blank=True,
+    null=True
+  )
   def __unicode__(self):
     return self.concepto + " - " + self.monto
+
+class Transferencia(models.Model):
+  fecha = models.DateField()
+  monto = models.ForeignKey(Gasto)
+  cuenta_retiro = models.ForeignKey(
+    Cuenta,
+    related_name='cuenta_retiro'
+  )
+  cuenta_deposito = models.ForeignKey(
+    Cuenta,
+    related_name='cuenta_deposito'
+  )
+  comentario = models.TextField()
+  fecha_creacion =  models.DateTimeField(editable=False)
+  fecha_modificacion =  models.DateTimeField(editable=False)
+  def __unicode__(self):
+    return self.concepto + " - " + self.monto
+  def save(self, *args, **kwargs):
+    if not self.id:
+      self.fecha_creacion = datetime.datetime.today()
+    self.fecha_modificacion = datetime.datetime.today()
+    super(Transferecia, self).save(*args, **kwargs)
+

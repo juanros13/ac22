@@ -54,7 +54,7 @@ Edificios editar
     <div class="portlet-body">
       <div class="tab-content search-page search-content-2">
         <div class="row">
-          <form role="form"  action="{% url 'vista_ingreso_crear' %}" method="POST" >
+          <form role="form"  action="{% url 'vista_gasto_crear' %}" method="POST" >
             <div class="col-sm-12">
               {% csrf_token %}
               <div class="form-body">
@@ -72,49 +72,43 @@ Edificios editar
                 </div>
                 <!--/row-->
                 <h3 class="form-section">DETALLE</h3>
-                <div class="add_form">asdsa</div>
-                <div class="portlet light bg-inverse">
-                  <div class="row">
-                    <div class="col-xs-12">
-
-                    </div>
-                    <div class="col-xs-7">
-                      <h4>Concepto</h4>
-                    </div>
-                    <div class="col-xs-3">
-                      <h4>Monto</h4>
-                    </div>
-                    <div class="col-xs-2">
-                      <h4>Acciones</h4>
-                    </div>
-                    <form method="post" action="./" id="forma_gasto_detalle">
-                      {% for form in gasto_detalle_form.forms %}
-                      <div id="{{ form.prefix }}-row" style="padding-bottom:35px; border-bottom:1px dotted #ccc; margin-bottom:6px;">
-                        <div class="col-xs-7">
-                          <div class="form-group">
-                              {{ form.concepto }}
-                          </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-xs-3">
-                          <div class="form-group">
-                            {{ form.monto }}
-                          </div>
-                        </div>
-                        <!--/span-->
-                        <div class="col-xs-2">
-                          <div class="form-group">
-                            <button type="button" class="btn red-mint">Eliminar</button>
-                          </div>
-                        </div>
-                      </div>
-                      {% endfor %}
-                      <!--/span-->
-                      {{ gasto_detalle_form.management_form }}
-                    </form>
-                  </div>
-                  <!--/row-->
-                </div>
+                <table id="id_gesto_detalle_formset" class="table table-striped table-bordered table-advance table-hover">
+                  <thead>
+                    <tr>
+                      <th>
+                        <i class="glyphicon glyphicon-tag"></i> Obra 
+                      </th>
+                      <th>
+                        <i class="glyphicon glyphicon-tag"></i> Concepto 
+                      </th>
+                      <th>
+                        <i class="fa fa-dollar"></i> Monto 
+                      </th>
+                      <th>
+                        <i class="fa fa-cog"></i> Acciones 
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for form in gasto_detalle_form.forms %}
+                    <tr id="{{ form.prefix }}-row">
+                      <td>
+                        {{ form.obra }}
+                      </td>
+                      <td>
+                        {{ form.concepto }}
+                      </td>
+                      <td>
+                        {{ form.monto }}
+                      </td>
+                      <td class="text-center"></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <p>
+                  {{ gasto_detalle_form.management_form }}
+                </p>
               </div>
             </div>
             <div class="col-md-12">
@@ -141,15 +135,20 @@ Edificios editar
 <script>
 jQuery(document).ready(function() {
   $('.date-picker').datepicker({
-    rtl: App.isRTL(),
-    orientation: "left",
-    autoclose: true,
-    format: 'yyyy-mm-dd',
-    todayBtn: true,
-    todayHighlight:true,
+      rtl: App.isRTL(),
+      orientation: "left",
+      autoclose: true,
+      format: 'yyyy-mm-dd',
+      todayBtn: true,
+      todayHighlight:true,
   });
-  $('#forma_gasto_detalle div').formset({
-      extraClasses: ['row1', 'row2', 'row3']
+  $('#id_gesto_detalle_formset tbody tr').formset({
+    prefix: "{{ gasto_detalle_form.prefix }}",
+    addText: 'Agregar otro',
+    deleteText: 'Quitar',   
+    addCssClass: 'add-row btn blue-soft', 
+    deleteCssClass: 'add-row btn red text-center',
+
   });
 });
 </script>

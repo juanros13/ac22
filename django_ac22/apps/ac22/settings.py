@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.recursos',
     'apps.catalogo_de_conceptos',
     'apps.gestion_financiera',
+    'apps.proveedores',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'^recursos/', include('apps.recursos.urls')),
     url(r'^catalogo_de_conceptos/', include('apps.catalogo_de_conceptos.urls')),
     url(r'^gestion_financiera/', include('apps.gestion_financiera.urls')),
+    url(r'^proveedores/', include('apps.proveedores.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

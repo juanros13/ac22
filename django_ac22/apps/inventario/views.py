@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import permission_required, login_required
 from django.http import HttpResponseRedirect, HttpResponse, Http404, HttpResponseServerError
 from django.forms import formset_factory
 from django.contrib.auth.models import User
-from apps.inventario.forms import CatalogoForm, CategoriaForm, AlmacenAddForm, ProveedorAddForm, MovimientoForm, IventarioAltaForm
-from apps.inventario.models import Catalogo, Categoria, Almacen, Proveedor, Movimiento, Inventario
+from apps.inventario.forms import CatalogoForm, CategoriaForm, AlmacenAddForm, MovimientoForm, IventarioAltaForm
+from apps.inventario.models import Catalogo, Categoria, Almacen, Movimiento, Inventario
 
 @login_required(login_url='/')
 def inventario_resumen_view(request):
@@ -66,36 +66,6 @@ def almacen_crear_view(request):
   }
   return render(request, 'inventario/crear_almacen.html',context)
 
-@login_required(login_url='/')
-def proveedor_view(request):
-  message = ''
-  if request.session.get('_info_message'):
-    message = request.session.get('_info_message')
-  request.session['_info_message'] = ''
-  proveedores = Proveedor.objects.all()
-  context = {
-    'proveedores': proveedores,
-    'message': message
-  }
-  return render(request, 'inventario/proveedor.html',context)
-
-@login_required(login_url='/')
-def proveedor_crear_view(request):
-  url = reverse('vista_proveedor')
-  proveedor_form = ProveedorAddForm()
-  if request.method == "POST":
-    proveedor_form = ProveedorAddForm(request.POST)
-    if proveedor_form.is_valid():
-      proveedor = proveedor_form.save(commit=False)
-      proveedor.usuario_creo = request.user
-      proveedor.save()
-      request.session['_info_message']  = 'Catalogo agregado correctamente'  
-      return HttpResponseRedirect(url)
-
-  context = {
-    'proveedor_form': proveedor_form,
-  }
-  return render(request, 'inventario/crear_proveedor.html',context)
 
 @login_required(login_url='/')
 def catalogo_crear_view(request):

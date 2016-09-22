@@ -145,6 +145,11 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item {% if 'proveedor/' in request.path %}active open{% endif %}">
+            <a href="{% url 'vista_proveedor' %}" class="nav-item {% if 'proveedor/' in request.path %}active open{% endif %}">
+              <span class="title">Proveedores</span>
+            </a>
+          </li>
         </ul>
       </li>
       <li class="nav-item {% if 'financiera/' in request.path %}active openactive open{% endif %}">
@@ -189,11 +194,11 @@
               <span class="arrow {% if 'financiera/egresos' in request.path %}open{% endif %}"></span>
             </a>
             <ul class="sub-menu">
-              <li class="nav-item {% if vista_gasto_crear == request.path %}active open{% endif %}">
+              <li class="nav-item {% if 'financiera/egresos/gasto' in request.path %}active openactive open{% endif %}">
                 <a href="{% url 'vista_gasto_crear' %}" class="nav-link nav-toggle">
-                  <i class="fa fa-upload"></i>
+                  <i class="icon-wallet"></i>
                   Gastos
-                  <span class="arrow {% if 'financiera/egresos' in request.path %}open{% endif %}"></span>  
+                  <span class="arrow {{% if 'financiera/egresos/gasto' in request.path %}active openactive open{% endif %}"></span>  
                 </a>
                 <ul class="sub-menu">
                   <li class="nav-item {% if vista_gasto_crear == request.path %}active open{% endif %}">
@@ -204,6 +209,30 @@
                   <li class="nav-item {% if vista_gasto == request.path %}active open{% endif %}">
                     <a href="{% url 'vista_gasto' %}" class="nav-link nav-toggle">
                       Consultar
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item {% if 'financiera/egresos/facturas_por_pagar' in request.path %}active openactive open{% endif %}">
+                <a href="{% url 'vista_gasto_crear' %}" class="nav-link nav-toggle">
+                  <i class="glyphicon glyphicon-list-alt"></i>
+                  Facturas de pagar
+                  <span class="arrow {{% if 'financiera/egresos/facturas_por_pagar' in request.path %}active openactive open{% endif %}"></span>  
+                </a>
+                <ul class="sub-menu">
+                  <li class="nav-item {% if vista_gasto_crear == request.path %}active open{% endif %}">
+                    <a href="{% url 'vista_gasto_crear' %}" class="nav-link nav-toggle">
+                      Registrar
+                    </a>
+                  </li>
+                  <li class="nav-item {% if vista_gasto == request.path %}active open{% endif %}">
+                    <a href="{% url 'vista_gasto' %}" class="nav-link nav-toggle">
+                      Consultar
+                    </a>
+                  </li>
+                  <li class="nav-item {% if vista_gasto == request.path %}active open{% endif %}">
+                    <a href="{% url 'vista_gasto' %}" class="nav-link nav-toggle">
+                      Pagar
                     </a>
                   </li>
                 </ul>

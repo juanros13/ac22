@@ -4,9 +4,6 @@ from django.db import models
 from django.utils.text import Truncator
 from mptt.models import MPTTModel, TreeForeignKey
 from apps.obras.models import Obra
-from apps.inventario.models import Proveedor
-
-
 
 class Cuenta(models.Model):
   nombre = models.CharField(
@@ -137,4 +134,30 @@ class Transferencia(models.Model):
       self.fecha_creacion = datetime.datetime.today()
     self.fecha_modificacion = datetime.datetime.today()
     super(Transferecia, self).save(*args, **kwargs)
+
+
+class FacturasPorPagarTipo(models.Model):
+  nombre = models.CharField(max_length=450)
+  def __unicode__(self):
+    return self.nombre  
+
+
+class FacturasPorPagar(models.Model):
+  fecha_recepcion = models.DateField()
+  fecha_vencimiento = models.DateField()
+  folio_fiscal = models.CharField(
+    max_length=50
+  )
+  tipo = models.ForeignKey(FacturasPorPagarTipo)
+  metodo_pago = models.ForeignKey(MetodoPago)
+  condicion_pago = models.CharField(max_length=450)
+  fecha_creacion =  models.DateTimeField(editable=False)
+  fecha_modificacion =  models.DateTimeField(editable=False)
+  def __unicode__(self):
+    return self.fecha + " - " + self.monto 
+  def save(self, *args, **kwargs):
+    if not self.id:
+      self.fecha_creacion = datetime.datetime.today()
+    self.fecha_modificacion = datetime.datetime.today()
+    super(FacturasPorPagar, self).save(*args, **kwargs)
 
